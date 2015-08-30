@@ -9,4 +9,6 @@ class OmniauthCallbacksController < ApplicationController
       redirect_to new_user_registration_url
     end
   end
+
+  alias_method :vkontakte, :facebook
 end
