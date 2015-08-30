@@ -34,6 +34,7 @@ gem "seedbank"
 gem "puma"
 gem "pundit"
 gem "rack-canonical-host"
+gem "omniauth-facebook"
 
 group :staging, :production do
   gem "rails_12factor"
