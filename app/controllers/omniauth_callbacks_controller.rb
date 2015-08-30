@@ -1,14 +1,16 @@
 class OmniauthCallbacksController < ApplicationController
   def facebook
-    @user = User.from_omniauth(request.env["omniauth.auth"])
+    result = OmniAuthenticator.call(auth_data)
+    result.user.remember_me = true
 
-    if @user.persisted?
-      @user.remember_me = true
-      sign_in_and_redirect @user
-    else
-      redirect_to new_user_registration_url
-    end
+    sign_in_and_redirect(result.user)
   end
 
   alias_method :vkontakte, :facebook
+
+  private
+
+  def auth_data
+    request.env["omniauth.auth"]
+  end
 end
