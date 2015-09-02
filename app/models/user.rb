@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :confirmable,
     :recoverable, :rememberable, :trackable, :validatable
-  devise :omniauthable, :omniauth_providers => [:facebook, :vkontakte, :twitter, :instagram]
+  devise :omniauthable, :omniauth_providers => [:facebook, :vkontakte, :twitter, :instagram, :github]
 
   has_many :accounts, dependent: :destroy
 

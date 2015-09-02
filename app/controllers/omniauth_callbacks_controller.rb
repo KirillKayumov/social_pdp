@@ -13,10 +13,11 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   alias_method :vkontakte, :facebook
   alias_method :twitter, :facebook
   alias_method :instagram, :facebook
+  alias_method :github, :facebook
 
   private
 
   def auth_data
-    request.env["omniauth.auth"]
+    request.env["omniauth.auth"].merge(current_user: current_user)
   end
 end
