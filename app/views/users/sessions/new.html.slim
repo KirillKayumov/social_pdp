@@ -16,6 +16,9 @@
         | account
 
       .form-inputs
+        = hidden_field_tag :provider, provider
+        = hidden_field_tag :uid, uid
+
         = f.input :email, required: false, autofocus: true
         = f.input :password, required: false
         = f.input :remember_me, as: :boolean
