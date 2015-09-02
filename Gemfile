@@ -37,6 +37,7 @@ gem "rack-canonical-host"
 gem "omniauth-facebook"
 gem "omniauth-vkontakte"
 gem "omniauth-twitter"
+gem "omniauth-instagram"
 
 group :staging, :production do
   gem "rails_12factor"
