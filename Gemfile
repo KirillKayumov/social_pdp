@@ -38,6 +38,7 @@ gem "omniauth-facebook"
 gem "omniauth-vkontakte"
 gem "omniauth-twitter"
 gem "omniauth-instagram"
+gem "omniauth-github"
 
 group :staging, :production do
   gem "rails_12factor"

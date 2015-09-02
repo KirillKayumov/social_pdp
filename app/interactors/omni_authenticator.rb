@@ -19,7 +19,7 @@ class OmniAuthenticator
   end
 
   def user
-    @user ||= User.find_by(email: context.info.email)
+    @user ||= context.current_user || User.find_by(email: context.info.email)
   end
 
   def create_account(user)
