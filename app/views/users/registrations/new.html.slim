@@ -16,6 +16,10 @@
         | account
 
       .form-inputs
+        - if provider.present? && uid.present?
+          = hidden_field_tag :provider, provider
+          = hidden_field_tag :uid, uid
+
         = f.input :full_name, required: true, autofocus: true
         = f.input :email, required: true
         = f.input :password, required: true

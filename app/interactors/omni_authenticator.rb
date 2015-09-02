@@ -2,17 +2,14 @@ class OmniAuthenticator
   include Interactor
 
   def call
-    context.user =
-      if account.present?
-        account.user
-      elsif user.present?
-        create_account(user)
-        user
-      else
-        new_user = create_user
-        create_account(new_user)
-        new_user
-      end
+    if account.present?
+      context.user = account.user
+    elsif user.present?
+      create_account(user)
+      context.user = user
+    else
+      create_user_and_account
+    end
   end
 
   private
@@ -29,7 +26,14 @@ class OmniAuthenticator
     Account.create(provider: context.provider, uid: context.uid, user: user)
   end
 
-  def create_user
-    User.create(email: context.info.email, password: Devise.friendly_token)
+  def create_user_and_account
+    user = User.create(email: context.info.email, password: Devise.friendly_token)
+
+    if user.persisted?
+      create_account(user)
+      context.user = user
+    else
+      context.fail!
+    end
   end
 end
