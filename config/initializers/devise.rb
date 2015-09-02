@@ -232,6 +232,7 @@ Devise.setup do |config|
   config.omniauth :facebook, ENV["FACEBOOK_ID"], ENV["FACEBOOK_SECRET"], info_fields: "email, name", lang: "en"
   config.omniauth :vkontakte, ENV["VKONTAKTE_ID"], ENV["VKONTAKTE_SECRET"], scope: "email", lang: "en"
   config.omniauth :twitter, ENV["TWITTER_ID"], ENV["TWITTER_SECRET"], lang: "en"
+  config.omniauth :instagram, ENV["INSTAGRAM_ID"], ENV["INSTAGRAM_SECRET"], lang: "en"
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
