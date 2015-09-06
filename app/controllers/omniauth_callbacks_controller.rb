@@ -14,6 +14,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   alias_method :twitter, :facebook
   alias_method :instagram, :facebook
   alias_method :github, :facebook
+  alias_method :google_oauth2, :facebook
 
   private
 

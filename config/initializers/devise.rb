@@ -234,6 +234,7 @@ Devise.setup do |config|
   config.omniauth :twitter, ENV["TWITTER_ID"], ENV["TWITTER_SECRET"], lang: "en"
   config.omniauth :instagram, ENV["INSTAGRAM_ID"], ENV["INSTAGRAM_SECRET"], lang: "en"
   config.omniauth :github, ENV["GITHUB_ID"], ENV["GITHUB_SECRET"], scope: "user", lang: "en"
+  config.omniauth :google_oauth2, ENV["GOOGLE_ID"], ENV["GOOGLE_SECRET"], lang: "en"
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
