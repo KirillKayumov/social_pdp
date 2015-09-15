@@ -229,9 +229,10 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  config.omniauth :facebook, ENV["FACEBOOK_ID"], ENV["FACEBOOK_SECRET"], info_fields: "email, name", lang: "en"
+  config.omniauth :facebook, ENV["FACEBOOK_ID"], ENV["FACEBOOK_SECRET"], scope: "user_about_me, user_location",
+    info_fields: "email, name, gender, birthday, location, bio", locale: "en"
   config.omniauth :vkontakte, ENV["VKONTAKTE_ID"], ENV["VKONTAKTE_SECRET"], scope: "email", lang: "en"
-  config.omniauth :twitter, ENV["TWITTER_ID"], ENV["TWITTER_SECRET"], lang: "en"
+  config.omniauth :twitter, ENV["TWITTER_ID"], ENV["TWITTER_SECRET"], authorize_params: { lang: "en" }
   config.omniauth :instagram, ENV["INSTAGRAM_ID"], ENV["INSTAGRAM_SECRET"], lang: "en"
   config.omniauth :github, ENV["GITHUB_ID"], ENV["GITHUB_SECRET"], scope: "user", lang: "en"
   config.omniauth :google_oauth2, ENV["GOOGLE_ID"], ENV["GOOGLE_SECRET"], lang: "en"

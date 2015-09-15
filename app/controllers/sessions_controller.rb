@@ -1,12 +1,11 @@
 class SessionsController < Devise::SessionsController
-  expose(:provider) { params[:provider] }
-  expose(:uid) { params[:uid] }
+  include Authentication
+
+  after_action :clear_session, only: :create
 
   def create
     super do |resource|
-      if provider.present? && uid.present?
-        resource.accounts.create(provider: provider, uid: uid)
-      end
+      authenticate_user(resource) if use_omniauth?
     end
   end
 end
