@@ -5,7 +5,7 @@ class OmniAuthenticator
     if account.present?
       context.user = account.user
     elsif user.present?
-      create_account(user)
+      connect_new_account(user)
       context.user = user
     else
       create_user_and_account
@@ -14,23 +14,28 @@ class OmniAuthenticator
 
   private
 
+  def auth_data
+    context.auth_data
+  end
+
   def account
-    @account ||= Account.find_by(provider: context.provider, uid: context.uid)
+    @account ||= Account.find_by(provider: auth_data.provider, uid: auth_data.uid)
   end
 
   def user
-    @user ||= context.current_user || User.find_by(email: context.info.email)
+    @user ||= context.current_user || User.find_by(email: auth_data.email)
   end
 
-  def create_account(user)
-    Account.create(provider: context.provider, uid: context.uid, user: user)
+  def connect_new_account(user)
+    Account.create(provider: auth_data.provider, uid: auth_data.uid, user: user)
+    user.update_profile(auth_data)
   end
 
   def create_user_and_account
-    user = User.create(email: context.info.email, password: Devise.friendly_token)
+    user = User.create(email: auth_data.email, password: Devise.friendly_token)
 
     if user.persisted?
-      create_account(user)
+      connect_new_account(user)
       context.user = user
     else
       context.fail!

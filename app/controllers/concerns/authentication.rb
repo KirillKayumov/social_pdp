@@ -10,4 +10,22 @@ module Authentication
       super
     end
   end
+
+  def auth_data
+    @_auth_data ||= OmniauthParamsParser.new(
+      request.env["omniauth.auth"] || session["auth_data"]
+    )
+  end
+
+  def authenticate_user(user)
+    OmniAuthenticator.call(current_user: user, auth_data: auth_data)
+  end
+
+  def use_omniauth?
+    auth_data.provider.present? && auth_data.uid.present?
+  end
+
+  def clear_session
+    session.delete("auth_data")
+  end
 end

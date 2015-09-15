@@ -10,15 +10,15 @@
         html: { method: :put } do |f|
 
       .form-inputs
-        = f.input :full_name, required: true, autofocus: true
+        = f.input :name, autofocus: true
+        = f.input :location
+        = f.input :gender, collection: [%w(Male male), %w(Female female)], include_blank: true
+        = f.input :bio
+        = f.input :birthday, include_blank: true, start_year: 100.years.ago.year, end_year: Date.today.year
         = f.input :email, required: true
-        = f.input :password,
-            autocomplete: "off",
-            required: false
-        = f.input :password_confirmation,
-            required: false
-        = f.input :current_password,
-            required: true
+        = f.input :password, autocomplete: "off", required: false
+        = f.input :password_confirmation, required: false
+        = f.input :current_password, required: true
 
       .form-actions
         = f.button :submit, "Update"
