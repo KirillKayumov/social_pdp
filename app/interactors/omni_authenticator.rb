@@ -27,7 +27,7 @@ class OmniAuthenticator
   end
 
   def connect_new_account(user)
-    Account.create(provider: auth_data.provider, uid: auth_data.uid, user: user)
+    user.accounts.create(account_params)
     user.update_profile(auth_data)
   end
 
@@ -40,5 +40,13 @@ class OmniAuthenticator
     else
       context.fail!
     end
+  end
+
+  def account_params
+    {
+      provider: auth_data.provider,
+      uid: auth_data.uid,
+      url: auth_data.url
+    }
   end
 end
