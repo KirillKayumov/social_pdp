@@ -7,13 +7,30 @@ class OmniauthParamsParser
     2 => "male"
   }
 
-  def initialize(params)
-    @params = params || {}
+  PROFILE_ATTRIBUTES = %w(
+    sex
+    gender
+    bdate
+    birthday
+    bio
+    description
+  )
+
+  PROVIDERS = {
+    "facebook" => "Facebook",
+    "vkontakte" => "Vkontakte",
+    "twitter" => "Twitter",
+    "github" => "GitHub",
+    "google_oauth2" => "Google"
+  }
+
+  def initialize(params = {})
+    @params = params
   end
 
   def for_session
     new_params = params.dup
-    new_params["extra"] = raw_info
+    new_params["extra"] = { "raw_info" => raw_info_for_session }
     new_params
   end
 
@@ -30,11 +47,11 @@ class OmniauthParamsParser
   end
 
   def name
-    params["info"]["name"]
+    info["name"]
   end
 
   def location
-    params["info"]["location"]
+    info["location"]
   end
 
   def gender
@@ -49,6 +66,18 @@ class OmniauthParamsParser
     info["bio"] || raw_info["bio"] || raw_info["description"]
   end
 
+  def url
+    urls[PROVIDERS[provider]] || default_url
+  end
+
+  def urls
+    info["urls"] || {}
+  end
+
+  def nickname
+    info["nickname"]
+  end
+
   private
 
   def info
@@ -59,8 +88,12 @@ class OmniauthParamsParser
     params["extra"]["raw_info"] || {}
   end
 
+  def raw_info_for_session
+    raw_info.select { |key| PROFILE_ATTRIBUTES.include?(key) }
+  end
+
   def convert_gender(gender)
-    GENDERS.key?(gender) ? GENDERS[gender] : gender
+    GENDERS.fetch(gender, gender)
   end
 
   def convert_birthday(birthday)
@@ -71,5 +104,9 @@ class OmniauthParamsParser
     else
       Date.parse(birthday)
     end
+  end
+
+  def default_url
+    "http://#{provider}.com/#{nickname}"
   end
 end
