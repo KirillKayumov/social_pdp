@@ -1,5 +1,5 @@
 class Account < ActiveRecord::Base
   belongs_to :user
 
-  validates :provider, :uid, presence: true
+  validates :provider, :uid, :user, presence: true
 end
