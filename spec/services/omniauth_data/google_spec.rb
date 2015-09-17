@@ -5,7 +5,7 @@ describe OmniauthData::Google do
     {
       "info" => {
         "urls" => {
-          "Google" => "my_link"
+          "Google" => "my_url"
         }
       }
     }
@@ -13,6 +13,6 @@ describe OmniauthData::Google do
   let(:parser) { described_class.new(auth_hash) }
 
   describe "#url" do
-    it { expect(parser.url).to eq("my_link") }
+    it { expect(parser.url).to eq("my_url") }
   end
 end
