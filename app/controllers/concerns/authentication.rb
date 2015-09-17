@@ -12,9 +12,10 @@ module Authentication
   end
 
   def auth_data
-    @_auth_data ||= OmniauthParamsParser.new(
-      request.env["omniauth.auth"] || session["auth_data"]
-    )
+    data = request.env["omniauth.auth"] || session["auth_data"] || {}
+    provider = data["provider"]
+
+    @_auth_data ||= OmniauthDataFactory.build(provider, data)
   end
 
   def authenticate_user(user)
