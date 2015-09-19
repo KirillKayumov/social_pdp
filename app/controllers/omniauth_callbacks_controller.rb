@@ -29,9 +29,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     if user_signed_in?
       connect_account_to_current_user
     else
-      sign_in_with_existing_account ||
-      sign_in_with_new_account ||
-      sign_up_with_new_account
+      sign_in_with_existing_account || sign_in_with_new_account || sign_up_with_new_account
     end
   end
 

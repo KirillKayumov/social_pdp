@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
 
   devise :database_authenticatable, :registerable, :confirmable,
     :recoverable, :rememberable, :trackable, :validatable
-  devise :omniauthable, :omniauth_providers => OMNIAUTH_PROVIDERS
+  devise :omniauthable, omniauth_providers: OMNIAUTH_PROVIDERS
 
   has_many :accounts, dependent: :destroy
 
@@ -34,6 +34,6 @@ class User < ActiveRecord::Base
   private
 
   def assign_profile_attribute(attribute, value)
-    write_attribute(attribute, value) if read_attribute(attribute).blank? && value.present?
+    self[attribute] = value if self[attribute].blank? && value.present?
   end
 end

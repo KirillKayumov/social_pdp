@@ -1,6 +1,4 @@
 class OmniauthDataFactory
-  DEFAULT_PROVIDER = OmniauthData::Base
-
   PROVIDERS = {
     "facebook" => OmniauthData::Facebook,
     "vkontakte" => OmniauthData::Vkontakte,
@@ -11,6 +9,6 @@ class OmniauthDataFactory
   }
 
   def self.build(provider, data)
-    (PROVIDERS[provider] || DEFAULT_PROVIDER).new(data)
+    PROVIDERS[provider].new(data)
   end
 end
