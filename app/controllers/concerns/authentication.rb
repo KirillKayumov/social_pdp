@@ -18,10 +18,6 @@ module Authentication
     @_auth_data ||= OmniauthDataFactory.build(provider, data)
   end
 
-  def authenticate_user(user)
-    OmniAuthenticator.call(current_user: user, auth_data: auth_data)
-  end
-
   def use_omniauth?
     auth_data.provider.present? && auth_data.uid.present?
   end
