@@ -39,9 +39,9 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     result = ConnectAccount.call(auth_data: auth_data, user: current_user)
 
     if result.success?
-      flash[:notice] = "You have successfully connected social account."
+      flash[:notice] = I18n.t("flash.omniauth.connected")
     else
-      flash[:alert] = "This social account is already connected."
+      flash[:alert] = I18n.t("flash.omniauth.already_connected")
     end
 
     redirect_to edit_user_registration_path
@@ -51,7 +51,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     account = Account.find_by(provider: auth_data.provider, uid: auth_data.uid)
 
     if account.present?
-      flash[:notice] = "You have successfully signed in using social account."
+      flash[:notice] = I18n.t("flash.omniauth.signed_in")
       sign_in_and_redirect(account.user)
     end
   end
@@ -61,7 +61,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     if user.present?
       ConnectAccount.call(auth_data: auth_data, user: user)
-      flash[:notice] = "You have successfully signed in using social account."
+      flash[:notice] = I18n.t("flash.omniauth.signed_in")
       sign_in_and_redirect(user)
     end
   end
@@ -70,11 +70,11 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     result = AuthenticateNewUser.call(auth_data: auth_data)
 
     if result.success?
-      flash[:notice] = "You have successfully signed up using social account."
+      flash[:notice] = I18n.t("flash.omniauth.signed_up")
       sign_in_and_redirect(result.user)
     else
       session["auth_data"] = auth_data.for_session
-      flash[:alert] = "Social account is not linked with any profile on the website. Sign in or sign up to link social account."
+      flash[:alert] = I18n.t("flash.omniauth.not_linked")
       redirect_to new_user_registration_path
     end
   end
