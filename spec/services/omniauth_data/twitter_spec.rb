@@ -4,7 +4,7 @@ describe OmniauthData::Twitter do
   let(:auth_hash) do
     {
       "info" => {
-        "description" => "My description",
+        "description" => "My description"
       },
       "extra" => {
         "raw_info" => {

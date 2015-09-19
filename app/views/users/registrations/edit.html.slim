@@ -14,7 +14,7 @@
         = f.input :location
         = f.input :gender, collection: [%w(Male male), %w(Female female)], include_blank: true
         = f.input :bio
-        = f.input :birthday, include_blank: true, start_year: 100.years.ago.year, end_year: Date.today.year
+        = f.input :birthday, include_blank: true, start_year: 100.years.ago.year, end_year: Time.current.year
         = f.input :email, required: true
         = f.input :password, autocomplete: "off", required: false
         = f.input :password_confirmation, required: false

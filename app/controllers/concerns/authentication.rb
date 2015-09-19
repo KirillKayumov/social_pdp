@@ -15,11 +15,7 @@ module Authentication
     data = request.env["omniauth.auth"] || session["auth_data"] || {}
     provider = data["provider"]
 
-    @_auth_data ||= OmniauthDataFactory.build(provider, data)
-  end
-
-  def use_omniauth?
-    auth_data.provider.present? && auth_data.uid.present?
+    @_auth_data ||= OmniauthDataFactory.build(provider, data) if provider.present?
   end
 
   def clear_session

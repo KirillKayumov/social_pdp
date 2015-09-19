@@ -4,7 +4,7 @@ describe OmniauthData::Instagram do
   let(:auth_hash) do
     {
       "info" => {
-        "bio" => "My bio",
+        "bio" => "My bio"
       },
       "extra" => {
         "raw_info" => {
