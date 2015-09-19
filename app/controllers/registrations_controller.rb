@@ -5,7 +5,7 @@ class RegistrationsController < Devise::RegistrationsController
 
   def create
     super do |resource|
-      authenticate_user(resource) if resource.persisted? && use_omniauth?
+      ConnectAccount.call(auth_data: auth_data, user: resource) if resource.persisted? && use_omniauth?
     end
   end
 end

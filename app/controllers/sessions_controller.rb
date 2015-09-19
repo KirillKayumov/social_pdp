@@ -5,7 +5,7 @@ class SessionsController < Devise::SessionsController
 
   def create
     super do |resource|
-      authenticate_user(resource) if use_omniauth?
+      ConnectAccount.call(auth_data: auth_data, user: resource) if use_omniauth?
     end
   end
 end

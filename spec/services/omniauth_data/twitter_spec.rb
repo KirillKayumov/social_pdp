@@ -23,7 +23,8 @@ describe OmniauthData::Twitter do
       {
         "info" => {
           "description" => "My description"
-        }
+        },
+        "extra" => {}
       }
     end
 
