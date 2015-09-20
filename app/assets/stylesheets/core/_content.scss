@@ -1,0 +1,87 @@
+.facebook {
+  @include socicon;
+
+  &.is-connected,
+  &:hover {
+    color: $facebook-color;
+  }
+
+  &:before {
+    content: "b";
+  }
+}
+
+.vkontakte {
+  @include socicon;
+
+  &.is-connected,
+  &:hover {
+    color: $vkontakte-color;
+  }
+
+  &:before {
+    content: ";";
+  }
+}
+
+.twitter {
+  @include socicon;
+
+  &.is-connected,
+  &:hover {
+    color: $twitter-color;
+  }
+
+  &:before {
+    content: "a";
+  }
+}
+
+.instagram {
+  @include socicon;
+
+  &.is-connected,
+  &:hover {
+    color: $instagram-color;
+  }
+
+  &:before {
+    content: "x";
+  }
+}
+
+.github {
+  @include socicon;
+
+  &.is-connected,
+  &:hover {
+    color: $github-color;
+  }
+
+  &:before {
+    content: "Q";
+  }
+}
+
+.google_oauth2 {
+  @include socicon;
+
+  &.is-connected,
+  &:hover {
+    color: $google_oauth2-color;
+  }
+
+  &:before {
+    content: "c";
+  }
+}
+
+.social_list {
+  list-style-type: none;
+
+  li {
+    display: inline-block;
+
+    margin-right: 20px;
+  }
+}

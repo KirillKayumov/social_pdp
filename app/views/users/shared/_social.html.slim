@@ -1,0 +1,5 @@
+ul.social_list
+  - User.omniauth_providers.each do |provider|
+    - connected = local_assigns[:connected_providers].to_a.include?(provider)
+    li
+      = social_icon(provider, connected)

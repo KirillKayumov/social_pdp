@@ -1,4 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
+  expose(:connected_providers) { resource.accounts.pluck(:provider).map(&:to_sym) }
+
   def create
     super do |resource|
       if resource.persisted? && auth_data.present?
