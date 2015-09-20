@@ -10,6 +10,10 @@ en:
       destroy:
         notice: '%{resource_name} was successfully destroyed.'
         alert: '%{resource_name} could not be destroyed.'
+    accounts:
+      destroy:
+        notice: "You have successfully unlinked social account."
+
     omniauth:
       connected: You have successfully connected social account.
       already_connected: This social account is already connected.

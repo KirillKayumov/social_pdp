@@ -23,10 +23,10 @@ feature "Social accounts connection" do
     OmniAuth.config.add_mock(:twitter, twitter_data)
 
     login_as user
-    visit edit_user_registration_path
   end
 
   scenario "user connects new social account" do
+    visit edit_user_registration_path
     click_social_icon(:twitter)
 
     expect(page).to have_content("You have successfully connected social account.")
@@ -39,9 +39,22 @@ feature "Social accounts connection" do
     let!(:account) { create :account, user: another_user, provider: "twitter", uid: "654321" }
 
     it "does NOT connect social account" do
+      visit edit_user_registration_path
       click_social_icon(:twitter)
 
       expect(page).to have_content("This social account is already connected.")
+      expect(page).not_to have_connected_provider(:twitter)
+    end
+  end
+
+  context "when user has social account" do
+    let!(:account) { create :account, user: user, provider: "twitter", uid: "654321" }
+
+    scenario "user deletes social account" do
+      visit edit_user_registration_path
+      click_social_icon(:twitter)
+
+      expect(page).to have_content("You have successfully unlinked social account.")
       expect(page).not_to have_connected_provider(:twitter)
     end
   end
