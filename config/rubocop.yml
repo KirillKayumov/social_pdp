@@ -50,3 +50,7 @@ Style/ClassAndModuleChildren:
 
 Metrics/AbcSize:
   Max: 18
+
+Style/PredicateName:
+  Exclude:
+    - spec/**/*

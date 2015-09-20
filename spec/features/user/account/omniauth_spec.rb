@@ -1,6 +1,10 @@
 require "rails_helper"
 
 feature "Social accounts connection" do
+  def have_connected_provider(provider)
+    have_css(".#{provider}.is-connected")
+  end
+
   let(:user) { create :user }
 
   let(:twitter_data) do
@@ -23,20 +27,22 @@ feature "Social accounts connection" do
   end
 
   scenario "user connects new social account" do
-    click_link "Sign in with Twitter"
+    click_social_icon(:twitter)
 
     expect(page).to have_content("You have successfully connected social account.")
     expect(page).to have_content("Name from Twitter")
+    expect(page).to have_connected_provider(:twitter)
   end
 
   context "when social account is connected to another user" do
     let(:another_user) { create :user }
-    let!(:account) { create :account, user: user, provider: "twitter", uid: "654321" }
+    let!(:account) { create :account, user: another_user, provider: "twitter", uid: "654321" }
 
     it "does NOT connect social account" do
-      click_link "Sign in with Twitter"
+      click_social_icon(:twitter)
 
       expect(page).to have_content("This social account is already connected.")
+      expect(page).not_to have_connected_provider(:twitter)
     end
   end
 end

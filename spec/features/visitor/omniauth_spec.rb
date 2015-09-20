@@ -1,6 +1,10 @@
 require "rails_helper"
 
 feature "Sign in using Omniauth" do
+  def have_connected_provider(provider)
+    have_css(".#{provider}.is-connected")
+  end
+
   let(:facebook_data) do
     {
       provider: "facebook",
@@ -38,10 +42,11 @@ feature "Sign in using Omniauth" do
   end
 
   scenario "user signes in for the first time" do
-    click_link "Sign in with Facebook"
+    click_social_icon(:facebook)
 
     expect(page).to have_content("You have successfully signed up using social account.")
     expect(page).to have_content("Name from Facebook")
+    expect(page).to have_connected_provider(:facebook)
   end
 
   context "when user already has account" do
@@ -49,15 +54,16 @@ feature "Sign in using Omniauth" do
     let!(:account) { create :account, user: user, provider: "facebook", uid: "123456" }
 
     scenario "user signes in" do
-      click_link "Sign in with Facebook"
+      click_social_icon(:facebook)
 
       expect(page).to have_content("You have successfully signed in using social account.")
+      expect(page).to have_connected_provider(:facebook)
     end
   end
 
   context "when social account has no email" do
     background do
-      click_link "Sign in with Twitter"
+      click_social_icon(:twitter)
     end
 
     scenario "user redirects to sign up form" do
@@ -74,6 +80,7 @@ feature "Sign in using Omniauth" do
 
       expect(page).to have_content("Welcome! You have signed up successfully.")
       expect(page).to have_content("Name from Twitter")
+      expect(page).to have_connected_provider(:twitter)
     end
 
     context "and user is already registered" do
@@ -89,6 +96,7 @@ feature "Sign in using Omniauth" do
 
         expect(page).to have_content("Signed in successfully.")
         expect(page).to have_content("Name from Twitter")
+        expect(page).to have_connected_provider(:twitter)
       end
     end
   end
