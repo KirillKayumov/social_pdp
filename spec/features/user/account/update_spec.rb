@@ -9,14 +9,14 @@ feature "Update Account" do
   end
 
   scenario "User updates account with valid data" do
-    fill_form(:user, full_name: "New Name", current_password: user.password)
+    fill_form(:user, name: "New Name", current_password: user.password)
     click_on "Update"
 
-    expect(page).to have_content("New Name")
+    expect(page).to have_field("Name", with: "New Name")
   end
 
   scenario "User updates account with invalid password" do
-    fill_form(:user, full_name: "New Name", current_password: "wrong")
+    fill_form(:user, name: "New Name", current_password: "wrong")
     click_on "Update"
 
     expect(page).to have_content("is invalid")

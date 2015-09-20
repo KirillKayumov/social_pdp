@@ -6,4 +6,10 @@ class RegistrationsController < Devise::RegistrationsController
       ConnectAccount.call(auth_data: auth_data, user: resource) if resource.persisted? && auth_data.present?
     end
   end
+
+  private
+
+  def after_update_path_for(_resource)
+    edit_user_registration_path
+  end
 end
