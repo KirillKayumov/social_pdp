@@ -54,3 +54,6 @@ Metrics/AbcSize:
 Style/PredicateName:
   Exclude:
     - spec/**/*
+
+Lint/ShadowingOuterLocalVariable:
+  Enabled: false

@@ -1,5 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
-  expose(:connected_providers) { resource.accounts.pluck(:provider).map(&:to_sym) }
+  expose(:accounts) { resource.accounts }
 
   def create
     super do |resource|
