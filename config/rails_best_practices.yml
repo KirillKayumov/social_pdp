@@ -32,6 +32,10 @@ RemoveUnusedMethodsInControllersCheck:
   - ApplicationController#clear_session
   - ApplicationController#after_sign_in_path_for
   - ApplicationController#after_sign_up_path_for
+  - RegistrationsController#create
+  - RegistrationsController#update_resource
+  - RegistrationsController#after_update_path_for
+  - SessionsController#create
 RemoveUnusedMethodsInHelpersCheck: { except_methods: [] }
 RemoveUnusedMethodsInModelsCheck: { except_methods: [] }
 ReplaceComplexCreationWithFactoryMethodCheck: { attribute_assignment_count: 2 }

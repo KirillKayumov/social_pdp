@@ -166,12 +166,12 @@ GEM
     highline (1.6.21)
     i18n (0.7.0)
     interactor (3.1.0)
-    jasmine (2.3.0)
+    jasmine (2.3.1)
       jasmine-core (~> 2.3)
       phantomjs
       rack (>= 1.2.1)
       rake
-    jasmine-core (2.3.0)
+    jasmine-core (2.3.4)
     jasmine-jquery-rails (2.0.3)
     jquery-rails (4.0.4)
       rails-dom-testing (~> 1.0)

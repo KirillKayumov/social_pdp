@@ -1,7 +1,11 @@
 class User
   class ParameterSanitizer < Devise::ParameterSanitizer
     USER_PARAMS = %i(
-      full_name
+      name
+      location
+      gender
+      bio
+      birthday
       email
       password
       password_confirmation

@@ -1,7 +1,7 @@
 ul.right
   - if user_signed_in?
     li.has-dropdown
-      a.user-dropdown(href="#") = current_user.name || current_user.email
+      a.user-dropdown(href="#") = current_user.name.presence || current_user.email
       ul.dropdown
         new_user_registration_path
         li

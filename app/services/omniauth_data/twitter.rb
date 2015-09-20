@@ -4,7 +4,7 @@ class OmniauthData::Twitter < OmniauthData::Base
   end
 
   def for_session
-    data_copy = data.dup
+    data_copy = data.except("extra")
     data_copy["extra"] = {}
     data_copy
   end
