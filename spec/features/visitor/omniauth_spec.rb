@@ -68,7 +68,7 @@ feature "Sign in using Omniauth" do
 
     scenario "user redirects to sign up form" do
       expect(page).to have_content("Social account is not linked with any profile on the website.")
-      expect(page).to have_content("Create your Rails Base example site account")
+      expect(page).to have_content("Create your Social PDP site account")
     end
 
     scenario "user signes up to finish authentication" do
