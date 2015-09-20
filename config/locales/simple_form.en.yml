@@ -20,5 +20,5 @@ en:
     hints:
       user:
         password: Leave it blank if you dont want to change it
-        current_password: We need your current password to confirm your changes
+        current_password: We need your current password to change it
 
