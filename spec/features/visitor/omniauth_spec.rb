@@ -61,6 +61,16 @@ feature "Sign in using Omniauth" do
     end
   end
 
+  context "when user is already signed up, but not confirmed" do
+    let!(:user) { create :user, email: "user@facebook.com" }
+
+    scenario "user tries to sign in" do
+      click_social_icon(:facebook)
+
+      expect(page).to have_content("You have to confirm your email address before continuing.")
+    end
+  end
+
   context "when social account has no email" do
     background do
       click_social_icon(:twitter)

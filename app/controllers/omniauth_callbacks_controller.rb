@@ -56,11 +56,15 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def sign_in_with_new_account
     user = User.find_by(email: auth_data.email)
+    return unless user
 
-    if user.present?
+    if user.confirmed?
       ConnectAccount.call(auth_data: auth_data, user: user)
       flash[:notice] = I18n.t("flash.omniauth.signed_in")
       sign_in_and_redirect(user)
+    else
+      flash[:alert] = I18n.t("flash.omniauth.confirmation_required")
+      redirect_to new_user_session_path
     end
   end
 

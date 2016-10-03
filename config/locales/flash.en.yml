@@ -20,3 +20,4 @@ en:
       signed_in: You have successfully signed in using social account.
       signed_up: You have successfully signed up using social account.
       not_linked: Social account is not linked with any profile on the website. Sign in or sign up to link social account.
+      confirmation_required: You have to confirm your email address before continuing.
