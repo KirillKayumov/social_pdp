@@ -2,7 +2,7 @@ class CreateUser
   include Interactor
 
   def call
-    user = User.new(email: auth_data.email, password: Devise.friendly_token)
+    user = User.new(email: auth_data.email, password: Devise.friendly_token, confirmed_at: Time.current)
 
     if user.save
       context.user = user

@@ -14,8 +14,9 @@ describe CreateUser do
 
       it { is_expected.to be_success }
 
-      it "creates user" do
+      it "creates confirmed user" do
         expect { do_call }.to change { User.count }.by(1)
+        expect(User.last).to be_confirmed
       end
 
       it "stores user in context" do
